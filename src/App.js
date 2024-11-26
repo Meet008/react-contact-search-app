@@ -17,7 +17,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchContacts(currentPage);
+    fetchContacts({}, currentPage, null);
   }, [currentPage]);
 
   // Fetch contacts based on the search parameters
@@ -43,13 +43,11 @@ const App = () => {
       const response = await fetch(url);
       const data = await response.json();
       const totalCount = response.headers.get("X-Total-Count"); // Extract total count from headers
-      console.log("Response headers:", response.headers);
 
       if (totalCount) {
         setTotalCount(Number(totalCount)); // Update the total count
       }
       setContacts(data);
-      setTotalCount(Number(totalCount)); // Set the total count as a number
     } catch (error) {
       console.error("Error fetching contacts:", error);
     } finally {

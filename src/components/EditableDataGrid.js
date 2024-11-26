@@ -278,7 +278,9 @@ const EditableDataGrid = ({
   const handlePaginationModelChange = (newModel) => {
     setPaginationModel(newModel);
     const newPage = newModel.page + 1; // Convert 0-based to 1-based
-    onPageChange(newPage);
+    if (onPageChange) {
+      onPageChange(newPage); // Only call onPageChange if it's provided
+    }
   };
 
   return (
