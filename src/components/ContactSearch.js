@@ -17,7 +17,7 @@ const ContactSearch = ({
   setSearchParams,
   onSearch,
   onResetFilter,
-  isLoading, // assuming you have a loading state to pass down
+  isLoading,
 }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
@@ -25,19 +25,6 @@ const ContactSearch = ({
   // Handle input change and update search parameters
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Add validation for certain fields here
-    if (name === "email" && !validateEmail(value)) {
-      // show error or warning for invalid email
-      return;
-    }
-    if (name === "phone" && !validatePhone(value)) {
-      // show error or warning for invalid phone number
-      return;
-    }
-    if (name === "dob" && !validateDate(value)) {
-      // show error or warning for invalid date format
-      return;
-    }
     setSearchParams((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -47,7 +34,26 @@ const ContactSearch = ({
   const validatePhone = (phone) => /^[0-9]{10}$/.test(phone); // Basic phone number validation
   const validateDate = (dob) => /^\d{4}-\d{2}-\d{2}$/.test(dob); // Date format YYYY-MM-DD
 
-  // Reset search parameters and trigger search after reset
+  const handleSearch = () => {
+    if (searchParams.email && !validateEmail(searchParams.email)) {
+      alert("Invalid email address!");
+      return;
+    }
+
+    if (searchParams.phone && !validatePhone(searchParams.phone)) {
+      alert("Invalid phone number!");
+      return;
+    }
+
+    if (searchParams.dob && !validateDate(searchParams.dob)) {
+      alert("Invalid birthdate format! Use YYYY-MM-DD.");
+      return;
+    }
+
+    onSearch(); // Trigger search only if validation passes
+  };
+
+  // Reset search parameters
   const handleResetSearch = () => {
     setIsResetting(true);
     setSearchParams({
@@ -63,7 +69,7 @@ const ContactSearch = ({
     });
   };
 
-  // After resetting the search params, trigger the search
+  // Trigger search after reset
   useEffect(() => {
     if (isResetting) {
       onSearch(); // Trigger the search after reset
@@ -89,7 +95,7 @@ const ContactSearch = ({
           </Typography>
         </Grid>
 
-        {/* Search fields (initial) */}
+        {/* Search fields */}
         {["firstName", "lastName", "email", "phone"].map((field, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <TextField
@@ -101,75 +107,83 @@ const ContactSearch = ({
               variant="outlined"
               size="small"
               sx={{ marginBottom: 2 }}
+              placeholder={field === "dob" ? "YYYY-MM-DD" : ""}
             />
           </Grid>
         ))}
 
-        {/* More Filters (additional fields) */}
+        {/* More Filters */}
         {showMoreFilters && (
           <>
-            {["address", "city", "state", "zipCode"].map((field, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <TextField
-                  label={field.replace(/([A-Z])/g, " $1").toUpperCase()}
-                  name={field}
-                  value={searchParams[field] || ""}
-                  onChange={handleInputChange}
-                  fullWidth
-                  variant="outlined"
-                  size="small"
-                  sx={{ marginBottom: 2 }}
-                />
-              </Grid>
-            ))}
+            {["dob", "address", "city", "state", "zipCode"].map(
+              (field, index) => (
+                <Grid item xs={12} sm={6} md={3} key={index}>
+                  <TextField
+                    label={field.replace(/([A-Z])/g, " $1").toUpperCase()}
+                    name={field}
+                    value={searchParams[field] || ""}
+                    onChange={handleInputChange}
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    sx={{ marginBottom: 2 }}
+                    placeholder={field === "dob" ? "YYYY-MM-DD" : ""}
+                  />
+                </Grid>
+              )
+            )}
           </>
         )}
-
-        {/* Action Buttons */}
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={3}
-          sx={{ display: "flex", gap: 2, justifyContent: "flex-start" }}
+      </Grid>
+      {/* Action Buttons */}
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={3}
+        sx={{
+          display: "flex",
+          gap: 2,
+          justifyContent: "flex-start",
+          flexWrap: "wrap",
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSearch}
+          sx={{ height: "50px", padding: "16px" }}
+          disabled={isLoading}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={onSearch}
-            sx={{ height: "50px", padding: "16px" }}
+          {isLoading ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Search"
+          )}
+        </Button>
+
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => setShowMoreFilters(!showMoreFilters)}
+          sx={{ height: "50px", padding: "16px" }}
+          endIcon={showMoreFilters ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        >
+          {!showMoreFilters ? "More Filters" : "Less Filters"}
+        </Button>
+
+        {(Object.values(searchParams).some((val) => val !== "") ||
+          isLoading) && (
+          <IconButton
+            color="error"
+            onClick={handleResetSearch}
+            sx={{ fontSize: "1.5rem", padding: "6px" }}
+            aria-label="reset"
             disabled={isLoading}
           >
-            {isLoading ? (
-              <CircularProgress size={24} color="inherit" />
-            ) : (
-              "Search"
-            )}
-          </Button>
-
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => setShowMoreFilters(!showMoreFilters)}
-            sx={{ height: "50px", padding: "16px" }}
-            endIcon={showMoreFilters ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          >
-            More Filters
-          </Button>
-
-          {(Object.values(searchParams).some((val) => val !== "") ||
-            isLoading) && (
-            <IconButton
-              color="error"
-              onClick={handleResetSearch}
-              sx={{ fontSize: "1.5rem", padding: "6px" }} // Adjusted icon size
-              aria-label="reset"
-              disabled={isLoading}
-            >
-              <RefreshIcon />
-            </IconButton>
-          )}
-        </Grid>
+            <RefreshIcon />
+          </IconButton>
+        )}
       </Grid>
     </Box>
   );
