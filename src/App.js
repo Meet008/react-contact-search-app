@@ -23,7 +23,9 @@ const App = () => {
   // Fetch contacts based on the search parameters
   const fetchContacts = async (query = {}, page = 1, pageSize = 25) => {
     setLoading(true);
-    let url = "http://localhost:4000/contacts";
+    const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:4000"; // Default fallback
+    let url = `${apiUrl}/contacts`;
+    // let url = "http://localhost:4000/contacts";
     const queryParams = new URLSearchParams();
 
     Object.keys(query).forEach((key) => {

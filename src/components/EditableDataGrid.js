@@ -69,9 +69,12 @@ const EditableDataGrid = ({
   };
 
   const performSave = async (rowData) => {
+    const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:4000"; // Fallback to localhost if the env variable is not set
+
     try {
       const response = await fetch(
-        `http://localhost:4000/contacts/${editingRowId}`,
+        // `http://localhost:4000/contacts/${editingRowId}`,
+        `${apiUrl}/contacts/${editingRowId}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
