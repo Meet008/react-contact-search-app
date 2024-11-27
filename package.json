@@ -19,8 +19,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "startlocal": "react-scripts start",
-    "start": "npm run concurrently",
+    "start": "react-scripts start",
+    "startcon": "npm run concurrently",
     "concurrently": "concurrently \"npm test\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
