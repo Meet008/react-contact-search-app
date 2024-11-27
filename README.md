@@ -21,24 +21,17 @@ Follow these steps to get the app up and running locally.
 
 ### 1. **Clone the repository**:
 ```bash
-git clone https://github.com/your-username/contact-search-app.git
+git clone https://github.com/Meet008/react-contact-search-app.git
 ```
 
 ### 2. **Navigate to the project directory**:
 ```bash
-cd contact-search-app
+cd react-contact-search-app
 ```
 
 ### 3. **Install dependencies**:
 For the frontend, install dependencies by running the following command:
 ```bash
-cd client
-npm install
-```
-
-For the backend, make sure your server is ready to provide the contact data:
-```bash
-cd server
 npm install
 ```
 
@@ -49,12 +42,7 @@ npm install
 npm start
 ```
 
-- To run the **server** (backend API, if applicable):
-```bash
-npm run server
-```
-
-The app should now be accessible on [http://localhost:3000](http://localhost:3000).
+The app should now be accessible on [https://react-contact-search-app.onrender.com/](https://react-contact-search-app.onrender.com/).
 
 ---
 
@@ -79,19 +67,7 @@ The app should now be accessible on [http://localhost:3000](http://localhost:300
 - **Material UI** 🎨: A React UI framework for creating beautiful, responsive layouts.
 - **React DataGrid** 📊: For displaying and managing large datasets with features like pagination and sorting.
 - **Node.js** 🟢: Backend server to handle API requests and serve contact data.
-- **MongoDB** 📂 (optional): Database for storing contact details (if used in the app).
 
----
-
-## 📸 Screenshots
-
-![Search Feature](./images/search-feature.png)
-_The search functionality allows for filtering contacts instantly._
-
-![Pagination Example](./images/pagination.png)
-_Efficient pagination for browsing through large datasets._
-
----
 
 ## 📝 License
 
@@ -109,8 +85,8 @@ We welcome contributions! If you'd like to improve or add features to the app, p
 
 For any questions, feedback, or inquiries, feel free to reach out to the project maintainer:
 
-- **Email**: your-email@example.com
-- **GitHub**: [github.com/your-username](https://github.com/your-username)
+- **Email**: meetchothani008@gmail.com
+- **GitHub**: [github.com/Meet008](https://github.com/Meet008)
 
 ---
 
