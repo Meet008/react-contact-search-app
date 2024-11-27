@@ -10,7 +10,6 @@ Welcome to the **Contact Search App**, a simple and efficient platform for manag
 - **Search Contacts** 🔍: Easily search for contacts by name or other details.
 - **Pagination** 📑: Efficient pagination for handling large contact lists.
 - **Responsive UI** 📱: A modern and mobile-friendly user interface built with **Material UI**.
-- **Loading State** ⏳: Show a loading spinner when data is being fetched.
 - **Server-side Pagination** ⚙️: Optimized pagination with a server-side approach for large data sets.
 - **Customizable** 🛠️: Easily modify the columns and data format based on your requirements.
 
