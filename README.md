@@ -42,6 +42,13 @@ npm install
 npm start
 ```
 
+### 5. **Test the app**:
+
+- To test the **client** (React app):
+```bash
+npm test
+```
+
 The app should now be accessible on [https://react-contact-search-app.onrender.com/](https://react-contact-search-app.onrender.com/).
 
 ---
