@@ -66,7 +66,7 @@ The app should now be accessible on [https://react-contact-search-app.onrender.c
 - **React** 🧱: JavaScript library for building user interfaces.
 - **Material UI** 🎨: A React UI framework for creating beautiful, responsive layouts.
 - **React DataGrid** 📊: For displaying and managing large datasets with features like pagination and sorting.
-- **Node.js** 🟢: Backend server to handle API requests and serve contact data.
+- **JSON Server** 🟢: A mock server to handle API requests and serve contact data.
 
 
 ## 📝 License
