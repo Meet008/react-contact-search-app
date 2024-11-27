@@ -17,7 +17,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchContacts({}, currentPage, null);
+    fetchContacts({}, currentPage);
   }, [currentPage]);
 
   // Fetch contacts based on the search parameters

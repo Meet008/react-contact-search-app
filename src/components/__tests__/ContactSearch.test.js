@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import ContactSearch from "./components/ContactSearch";
+import ContactSearch from "..//ContactSearch";
 
 describe("ContactSearch Component", () => {
   let mockOnSearch, mockSetSearchParams, searchParams;
